@@ -25,8 +25,84 @@ Dr. EB Todo:
 '''
 
 # left, right = robot.sonars()
-seconds = float(input(("How long do you want me to go (number of seconds)")))
-robot.motors(1, 1, seconds)
+
+def start(): 
+    input(("What would you like me to do? The options are turn, move, or dance."))
+    if input == "turn" or "Turn":
+            turning()
+    elif input == "move" or "Move":
+            moving()
+    elif input == "dance" or "Dance":
+            dance()
+    elif input == "stay" or "Stay":
+            stay()
+    else:
+            print("Sorry! That is not a valid input. Please try again!")
+            start()
+
+def turning ():
+    if input("Do you want to turn right?") == "Yes" or "yes" or "YES":
+        x = -1
+        y = 1
+        seconds = float(input("For how long do you want me turn?"))
+        robot.motors(x, y, seconds)
+    elif input("Do you want to turn left") == "Yes" or "yes" or "YES":
+        x = 1
+        y = -1
+        seconds = float(input("For how long do you want me turn?"))
+        robot.motors(x, y, seconds)
+    else:
+        moving()
+
+def moving():
+    direction = str(input("Do you want me to move forward or backward?"))
+    seconds = float(input(("For long do you want me to go (number of seconds)")))
+    if direction == "forward":
+        robot.motors(1,1,seconds)
+    elif direction == "backward": 
+        robot.motors(-1,-1,seconds)
+    else:
+        start()
+
+def stay():
+    robot.motors(0,0,5)
+    print("Now I'm staying in the same place and I'm bored!")
+    what_to_do = (input("Should I turn, dance, move, or stay?"))
+    if what_to_do == "turn" or "Turn":
+        turning()
+    if what_to_do == "dance" or "Dance":
+        dance()
+    if what_to_do == "move" or "Move":
+        moving()
+    if what_to_do == "stay" or "Stay":
+        print("I don't want to stay here :( I'm bored! Please pick something else for me to do.")
+        start()
+    else:
+        "I can't do that! try again!"
+        stay()
+
+
+def dance():
+    print("Lets dance!!!")
+    while True:
+        robot.motors(1,1,2)
+        robot.motors(-1,-1,2)
+        robot.motors(-1,1,5)
+        robot.motors(1,-1,5)
+    
+
+print("Hi! My name is RoboBunny!")
+start()
+
+
+
+
+
+
+    
+
+
+
 
 
 
