@@ -24,25 +24,31 @@ Dr. EB Todo:
  
 '''
 
-# left, right = robot.sonars()
+left_distance, right_distance = robot.sonars()
+left_distance = 120.57
+
+robot.motors(1,1,5)
+
+
 
 print("Hi! My name is RoboBunny!")
 
 def start(): 
-    action = str(input("What would you like me to do? The options are move, turn, or dance."))
-    if action == ("turn") or ("Turn"):
-            turning()
-    elif action == ("move") or ("Move"):
-            moving()
-    elif action == ("dance") or ("Dance"):
+    action = input(f"What would you like me to do? The options are move, turn, or dance.")
+    if action ==  "turn" or action == "Turn":
+            turn()
+    elif action == "move" or action == "Move":
+            move()
+    elif action == "dance" or action == "Dance":
             dance()
-    elif action == ("stay") or ("Stay"):
+    elif action == "stay" or action == "Stay":
             stay()
     else:
             print("Sorry! That is not a valid input. Please try again!")
             start()
 
-def turning ():
+def turn():
+    left_distance, right_distance 
     if input("Do you want to turn right?") == "Yes" or "yes" or "YES":
         x = -1
         y = 1
@@ -54,11 +60,11 @@ def turning ():
         seconds = float(input("For how long do you want me turn?"))
         robot.motors(x, y, seconds)
     else:
-        moving()
+        move()
 
-def moving():
+def move():
     direction = str(input("Do you want me to move forward or backward?"))
-    seconds = float(f.(input("For long do you want me to go {number of seconds}")))
+    seconds = float(input("For long do you want me to go {number of seconds}"))
     if direction == "forward":
         robot.motors(1,1,seconds)
     elif direction == "backward": 
@@ -71,11 +77,11 @@ def stay():
     print("Now I'm staying in the same place and I'm bored!")
     what_to_do = (input("Should I turn, dance, move, or stay?"))
     if what_to_do == "turn" or "Turn":
-        turning()
+        turn()
     if what_to_do == "dance" or "Dance":
         dance()
     if what_to_do == "move" or "Move":
-        moving()
+        move()
     if what_to_do == "stay" or "Stay":
         print("I don't want to stay here :( I'm bored! Please pick something else for me to do.")
         start()
@@ -86,21 +92,16 @@ def stay():
 
 def dance():
     print("Lets dance!!!")
-    while True:
+    for i in 20:
         robot.motors(1,1,2)
         robot.motors(-1,-1,2)
         robot.motors(-1,1,5)
         robot.motors(1,-1,5)
-    
+        robot.motors(1,1,2)
+
+
 start()
 
-
-    
-
-
-
-
-
-
+120.57
 robot.exitonclick()
 
