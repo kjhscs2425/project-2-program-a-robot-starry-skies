@@ -26,15 +26,17 @@ Dr. EB Todo:
 
 # left, right = robot.sonars()
 
+print("Hi! My name is RoboBunny!")
+
 def start(): 
-    input(("What would you like me to do? The options are turn, move, or dance."))
-    if input == "turn" or "Turn":
+    action = str(input("What would you like me to do? The options are move, turn, or dance."))
+    if action == ("turn") or ("Turn"):
             turning()
-    elif input == "move" or "Move":
+    elif action == ("move") or ("Move"):
             moving()
-    elif input == "dance" or "Dance":
+    elif action == ("dance") or ("Dance"):
             dance()
-    elif input == "stay" or "Stay":
+    elif action == ("stay") or ("Stay"):
             stay()
     else:
             print("Sorry! That is not a valid input. Please try again!")
@@ -56,7 +58,7 @@ def turning ():
 
 def moving():
     direction = str(input("Do you want me to move forward or backward?"))
-    seconds = float(input(("For long do you want me to go (number of seconds)")))
+    seconds = float(f.(input("For long do you want me to go {number of seconds}")))
     if direction == "forward":
         robot.motors(1,1,seconds)
     elif direction == "backward": 
@@ -90,13 +92,7 @@ def dance():
         robot.motors(-1,1,5)
         robot.motors(1,-1,5)
     
-
-print("Hi! My name is RoboBunny!")
 start()
-
-
-
-
 
 
     
