@@ -97,6 +97,7 @@ def start():
     print(left, right)
 
     if left <= 1 or right <= 1:
+        robot.motors(0,0,1)
         todo = input("Oops! We hit a corner! Let's do something else. Options are turn, move, stay, or dance")
         if todo == "stay":
             stay()
