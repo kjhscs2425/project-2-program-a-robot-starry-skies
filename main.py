@@ -29,8 +29,6 @@ left_distance = 120.57
 
 robot.motors(1,1,5)
 
-
-
 print("Hi! My name is RoboBunny!")
 
 def start(): 
@@ -49,12 +47,12 @@ def start():
 
 def turn():
     left_distance, right_distance 
-    if input("Do you want to turn right?") == "Yes" or "yes" or "YES":
+    if input("Do you want to turn right?") == "Yes" or input() == "yes" or input == "YES":
         x = -1
         y = 1
         seconds = float(input("For how long do you want me turn?"))
         robot.motors(x, y, seconds)
-    elif input("Do you want to turn left") == "Yes" or "yes" or "YES":
+    elif input("Do you want to turn left") == "Yes" or input == "yes" or input == "YES":
         x = 1
         y = -1
         seconds = float(input("For how long do you want me turn?"))
@@ -76,13 +74,13 @@ def stay():
     robot.motors(0,0,5)
     print("Now I'm staying in the same place and I'm bored!")
     what_to_do = (input("Should I turn, dance, move, or stay?"))
-    if what_to_do == "turn" or "Turn":
+    if what_to_do == "turn" or what_to_do == "Turn":
         turn()
-    if what_to_do == "dance" or "Dance":
+    if what_to_do == "dance" or  what_to_do == "Dance":
         dance()
-    if what_to_do == "move" or "Move":
+    if what_to_do == "move" or  what_to_do == "Move":
         move()
-    if what_to_do == "stay" or "Stay":
+    if what_to_do == "stay" or  what_to_do == "Stay":
         print("I don't want to stay here :( I'm bored! Please pick something else for me to do.")
         start()
     else:
@@ -102,6 +100,5 @@ def dance():
 
 start()
 
-120.57
 robot.exitonclick()
 
