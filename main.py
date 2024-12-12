@@ -1,6 +1,5 @@
 # Import the robot control commands from the library
-from simulator import robot
-import time
+
 
 '''
  Project Requirements:
@@ -24,7 +23,10 @@ Dr. EB Todo:
  
 '''
 
+from simulator import robot
 
+import time
+ 
 def turn():
     direction = str(input("Do you want me to turn clockwise or counter-clockwise?"))
     if direction == "clockwise":
@@ -38,22 +40,10 @@ def turn():
         seconds = seconds = float(input("For long do you want me to go {number of seconds}"))
         robot.motors(x, y, seconds)
     else:
-        move()
+        print("Sorry, that's not a valid input! Please try again.")
+        turn()
    
-def move():
-    direction = str(input("Do you want me to move forward or backward?"))
-    seconds = float(input("For long do you want me to go {number of seconds}"))
-    if direction == "forward":
-        robot.motors(1,1,seconds)
-        while True:
-            robot.sensors = (left, right)
-            print (left, right)
-    elif direction == "backward": 
-        robot.motors(-1,-1,seconds)
-    else:
-        start()
-
-
+    
 def stay():
     robot.motors(0,0,5)
     print("Now I'm staying in the same place and I'm bored!")
@@ -75,12 +65,18 @@ def dance():
     print("Lets dance!!!")
     dancing = float(input("For long do you want me to go (number of seconds)"))
     while dancing != 0:
-        robot.motors(1,1,2)
-        robot.motors(-1,1,2)
-        robot.motors(-2,-2,3)
-        robot.motors(1,-1,3)
-        robot.motors(-1,-1,2)
-        robot.motors(0)
+        for i in range(4):
+          robot.motors(1,1,1)
+          robot.motors(-1,1,1.5139)
+        for i in range(4):
+             robot.motors(-1,1,1.5139)
+
+
+       
+
+def main():
+  print("Hi! My name is RoboBunny!")
+  start()
 
 def start(): 
     action = input(f"What would you like me to do? The options are turn, move, dance, or stay.")
@@ -97,11 +93,34 @@ def start():
     else:
             print("Sorry! That is not a valid input. Please try again!")
             start()
-
-def main():
-  print("Hi! My name is RoboBunny!")
-  start()
+def sonar(left, right):
+    # forward_backward = str(input("Do you want me to move forward or backward?"))
+    left_distance, right_distance = robot.sonars()
+    print(left, right)
+    remainder  = float(input("For long do you want me to go {number of seconds}"))
+    while remainder >1:
+        left_distance, right_distance= robot.sonars()
+        robot.motors(left, right, 0.1)
+        remainder=remainder-0.2
+        if left_distance<100 and right_distance<100:
+            robot.motors (0, 0, 1)
+            print("Oh no! I don't want to crash into the wall, so please pick something else.")
+            start()
+    if left_distance<100 and right_distance<100:
+            robot.motors (0, 0, 1)
+            print("Oh no! I don't want to crash into the wall, so please pick something else.")
+            start()
+def move():
+    direction = str(input("Do you want me to move forward or backward?"))
+    if direction == "forward":
+         sonar(1,1)
+    if direction == "backward":
+         robot.motors(1,-1, 3)
+         sonar(1,1)
+    
 
 main()
+
+
 robot.exit()
 
