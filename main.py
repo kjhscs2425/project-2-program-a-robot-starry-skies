@@ -1,5 +1,4 @@
-# Import the robot control commands from the library
-
+# Import the robot control commands from the librar
 
 '''
  Project Requirements:
@@ -26,6 +25,7 @@ Dr. EB Todo:
 from simulator import robot
 
 import time
+
  
 def turn():
     direction = str(input("Do you want me to turn clockwise or counter-clockwise?"))
@@ -63,16 +63,16 @@ def stay():
 
 def dance():
     print("Lets dance!!!")
-    dancing = float(input("For long do you want me to go (number of seconds)"))
-    while dancing != 0:
-        for i in range(4):
+    dancing = int(input("For long do you want me to go (number of seconds)"))
+    while dancing > 0:
           robot.motors(1,1,1)
+          dancing=dancing-1.5
           robot.motors(-1,1,1.5139)
-        for i in range(4):
-             robot.motors(-1,1,1.5139)
-
-
-       
+          dancing=dancing-1.5
+          robot.motors(-1,-1,1)
+          dancing=dancing-1.5
+          robot.motors(-1,1,1.5139)
+          dancing=dancing-1.5
 
 def main():
   print("Hi! My name is RoboBunny!")
@@ -93,23 +93,24 @@ def start():
     else:
             print("Sorry! That is not a valid input. Please try again!")
             start()
+ 
+
 def sonar(left, right):
-    # forward_backward = str(input("Do you want me to move forward or backward?"))
     left_distance, right_distance = robot.sonars()
-    print(left, right)
-    remainder  = float(input("For long do you want me to go {number of seconds}"))
+    print(left_distance, right_distance)
+    remainder = float(input("For long do you want me to go {number of seconds}"))
     while remainder >1:
-        left_distance, right_distance= robot.sonars()
+        center = 0
+        left_distance, right_distance = robot.sonars()
         robot.motors(left, right, 0.1)
         remainder=remainder-0.2
+        center = center + 0.1
         if left_distance<100 and right_distance<100:
             robot.motors (0, 0, 1)
-            print("Oh no! I don't want to crash into the wall, so please pick something else.")
-            start()
-    if left_distance<100 and right_distance<100:
-            robot.motors (0, 0, 1)
-            print("Oh no! I don't want to crash into the wall, so please pick something else.")
-            start()
+            print("Oh no! I don't want to crash! Try again by pressing 'Run' and playing the code again!")
+            # I have been working on code to center the robot in order for it to be able to complete other actions after moving but the code is not done so I haven't included it in this rough draft. It will be ready for the final draft
+            quit()
+
 def move():
     direction = str(input("Do you want me to move forward or backward?"))
     if direction == "forward":
@@ -117,6 +118,7 @@ def move():
     if direction == "backward":
          robot.motors(1,-1, 3)
          sonar(1,1)
+         
     
 
 main()
