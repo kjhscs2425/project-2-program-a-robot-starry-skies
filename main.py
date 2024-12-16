@@ -27,17 +27,15 @@ from simulator import robot
 import time
 
  
-def turn():
-    direction = str(input("Do you want me to turn clockwise or counter-clockwise?"))
-    if direction == "clockwise":
+def turn(seconds):
+    turn_clock = str(input("Do you want me to turn clockwise or counter-clockwise?"))
+    if turn_clock == "clockwise":
         x = -1
         y = 1
-        seconds = float(input("For long do you want me to go {number of seconds}"))
         robot.motors(x, y, seconds)
-    elif  direction == "counter-clockwise":
+    elif  turn_clock == "counter-clockwise":
         x = 1
         y = -1
-        seconds = seconds = float(input("For long do you want me to go {number of seconds}"))
         robot.motors(x, y, seconds)
     else:
         print("Sorry, that's not a valid input! Please try again.")
@@ -49,7 +47,8 @@ def stay():
     print("Now I'm staying in the same place and I'm bored!")
     action = (input("Should I turn, dance, move, or stay?"))
     if action == "turn" or action == "Turn":
-        turn()
+        seconds = input(("For long do you want me to go"))
+        turn(seconds)
     elif action == "dance" or  action == "Dance":
         dance()
     elif action == "move" or  action == "Move":
@@ -83,7 +82,8 @@ def start():
     left, right = robot.sonars()
     print(left, right)
     if action ==  "turn" or action == "Turn":
-            turn()
+        seconds = float(input(("For long do you want me to go?")))
+        turn(seconds)
     elif action == "move" or action == "Move":
             move()
     elif action == "dance" or action == "Dance":
@@ -100,11 +100,9 @@ def sonar(left, right):
     print(left_distance, right_distance)
     remainder = float(input("For long do you want me to go {number of seconds}"))
     while remainder >1:
-        center = 0
         left_distance, right_distance = robot.sonars()
         robot.motors(left, right, 0.1)
         remainder=remainder-0.2
-        center = center + 0.1
         if left_distance<100 and right_distance<100:
             robot.motors (0, 0, 1)
             print("Oh no! I don't want to crash! Try again by pressing 'Run' and playing the code again!")
