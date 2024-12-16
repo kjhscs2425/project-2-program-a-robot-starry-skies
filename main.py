@@ -1,4 +1,4 @@
-# Import the robot control commands from the librar
+# Import the robot control commands from the library
 
 '''
  Project Requirements:
@@ -25,6 +25,7 @@ Dr. EB Todo:
 from simulator import robot
 
 import time
+
 
  
 def turn(seconds):
@@ -83,13 +84,13 @@ def start():
     print(left, right)
     if action ==  "turn" or action == "Turn":
         seconds = float(input(("For long do you want me to go?")))
-        turn(seconds)
+        return turn(seconds)
     elif action == "move" or action == "Move":
-            move()
+            return move()
     elif action == "dance" or action == "Dance":
-            dance()
+            return dance()
     elif action == "stay" or action == "Stay":
-            stay()
+            return stay()
     else:
             print("Sorry! That is not a valid input. Please try again!")
             start()
@@ -116,6 +117,9 @@ def move():
     if direction == "backward":
          robot.motors(1,-1, 3)
          sonar(1,1)
+
+
+
          
     
 
@@ -123,4 +127,8 @@ main()
 
 
 robot.exit()
+
+
+
+
 
