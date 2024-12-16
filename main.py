@@ -34,10 +34,12 @@ def turn(seconds):
         x = -1
         y = 1
         robot.motors(x, y, seconds)
+        start()
     elif  turn_clock == "counter-clockwise":
         x = 1
         y = -1
         robot.motors(x, y, seconds)
+        start()
     else:
         print("Sorry, that's not a valid input! Please try again.")
         turn()
@@ -86,11 +88,11 @@ def start():
         seconds = float(input(("For long do you want me to go?")))
         return turn(seconds)
     elif action == "move" or action == "Move":
-            return move()
+        return move()
     elif action == "dance" or action == "Dance":
-            return dance()
+        return dance()
     elif action == "stay" or action == "Stay":
-            return stay()
+        return stay()
     else:
             print("Sorry! That is not a valid input. Please try again!")
             start()
@@ -100,7 +102,7 @@ def sonar(left, right):
     left_distance, right_distance = robot.sonars()
     print(left_distance, right_distance)
     remainder = float(input("For long do you want me to go {number of seconds}"))
-    while remainder >1:
+    while remainder >0.1:
         left_distance, right_distance = robot.sonars()
         robot.motors(left, right, 0.1)
         remainder=remainder-0.2
@@ -109,14 +111,23 @@ def sonar(left, right):
             print("Oh no! I don't want to crash! Try again by pressing 'Run' and playing the code again!")
             # I have been working on code to center the robot in order for it to be able to complete other actions after moving but the code is not done so I haven't included it in this rough draft. It will be ready for the final draft
             quit()
+            return
+    if left_distance<100 and right_distance<100:
+        robot.motors (0, 0, 1)
+        print("Oh no! I don't want to crash! Try again by pressing 'Run' and playing the code again!")
+       # I have been working on code to center the robot in order for it to be able to complete other actions after moving but the code is not done so I haven't included it in this rough draft. It will be ready for the final draft
+        quit()
+        return
 
 def move():
     direction = str(input("Do you want me to move forward or backward?"))
     if direction == "forward":
-         sonar(1,1)
+         go = sonar
+         go(1,1)
     if direction == "backward":
          robot.motors(1,-1, 3)
-         sonar(1,1)
+         go = sonar
+         go(1,1)(1,1)
 
 
 
