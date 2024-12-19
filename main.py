@@ -35,35 +35,52 @@ import time
 # window.mainloop()
 # arr = np.array
 
- 
+
+# degree = 0.00
+# x = 0
+# y = 0
+# seconds = 0
+
+
 def turn(seconds):
-    global degree
-    global x
-    global y 
-    degree = 0
+    # global degree
+    # global x
+    # global y
     turn_clock = str(input("Do you want me to turn clockwise or counter-clockwise?"))
     if turn_clock == "clockwise":
         x = -1
         y = 1
-        degree = degree - (seconds/58.8)
+        # degree = float(degree - (seconds/58.8%360))
         robot.motors(x, y, seconds)
-        start()
-        return degree != 0
+        ask_question = input(str("Do you want to do something else?(yes/no)"))
+        if ask_question == "yes" or ask_question == "Yes":
+            robot.motors(-x, -y, seconds)
+            start()
+        else:
+            quit()
     elif  turn_clock == "counter-clockwise":
         x = 1
         y = -1
-        degree = degree + (seconds/58.8)
+        # degree = degree + (seconds/58.8%360)
         robot.motors(x, y, seconds)
-        start()
-        return degree != 0
+        # return degree != 0
+        ask_question = input(str("Do you want to do something else?(yes/no)"))
+        if ask_question == "yes" or ask_question == "Yes":
+            robot.motors(-x, -y, seconds)
+            start()
+        else:
+            quit()
     else:
         print("Sorry, that's not a valid input! Please try again.")
         turn()
    
     
 def stay():
-    if  degree != 0:
-        robot.motors(-x,-y,degree*60)
+    # print(degree)
+    # print(x)
+    # print(y)
+    # if  degree != 0:
+    #     robot.motors(seconds * degree)
     robot.motors(0,0,5)
     print("Now I'm staying in the same place and I'm bored!")
     action = (input("Should I turn, dance, move, do something random, or stay?"))
@@ -75,7 +92,7 @@ def stay():
     elif action == "move" or  action == "Move":
         move()
     elif action == "random" or  action == "random":
-        random()
+        random(random_action)
     elif action == "stay" or  action == "Stay":
         print("I don't want to stay here :( I'm bored! Please pick something else for me to do.")
         start()
@@ -84,17 +101,14 @@ def stay():
         stay()
 
 def random(random_action):
-    if  degree != 0:
-        robot.motors(seconds * degree)
     import random
     list1 = str[dance(), move(), stay(), turn()]
     random_action == random.random(list1)
     
     
 def dance():
-    global degree
-    # if  degree != 0:
-    #     robot.motors(-x,-y,degree*60)
+    # if degree != 0:
+    #     robot.motors(-x,-y,degree)
     print("Lets dance!!!")
     dancing = int(input("For long do you want me to go (number of seconds)"))
     while dancing > 0:
@@ -112,11 +126,17 @@ def main():
   start()
 
 def start():
+    # global seconds
+    # # print(x,y)
+    # # print(degree)
+    # print(seconds)
+    # if degree < 0:
+    #     robot.motors(-x,-y, seconds * degree)
+    # robot.motors(-1,1, 5)
     action = input(f"What would you like me to do? The options are turn, move, dance, do something random, or stay.")
     left, right = robot.sonars()
     print(left, right)
     if action ==  "turn" or action == "Turn":
-        global seconds
         seconds = float(input(("For long do you want me to go?")))
         turn(seconds)
     elif action == "move" or action == "Move":
@@ -154,8 +174,6 @@ def sonar(left, right):
         return
 
 def move():
-    if  degree != 0:
-        robot.motors()
     direction = str(input("Do you want me to move forward or backward?"))
     if direction == "forward":
          go = sonar
