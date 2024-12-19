@@ -92,7 +92,7 @@ def stay():
     elif action == "move" or  action == "Move":
         move()
     elif action == "random" or  action == "random":
-        random(random_action)
+        random_action()
     elif action == "stay" or  action == "Stay":
         print("I don't want to stay here :( I'm bored! Please pick something else for me to do.")
         start()
@@ -100,27 +100,27 @@ def stay():
         "I can't do that! try again!"
         stay()
 
-def random(random_action):
+def random_action():
     import random
-    list1 = str[dance(), move(), stay(), turn()]
-    random_action == random.random(list1)
+    list1 = [move, dance, stay, turn]
+    your_choice = random.choice(list1)
+    your_choice()
     
     
 def dance():
     # if degree != 0:
     #     robot.motors(-x,-y,degree)
     print("Lets dance!!!")
-    dancing = int(input("For long do you want me to go (number of seconds)"))
+    dancing = float(input("For long do you want me to go (number of seconds)"))
     while dancing > 0:
-          robot.motors(1,1,1)
-          dancing=dancing-1.5
-          robot.motors(-1,1,1.5139)
-          dancing=dancing-1.5
-          robot.motors(-1,-1,1)
-          dancing=dancing-1.5
-          robot.motors(-1,1,1.5139)
-          dancing=dancing-1.5
-
+        robot.motors(1,1,1)
+        dancing=dancing-1.5
+        robot.motors(-1,1,1)
+        dancing=dancing-1.5
+        robot.motors(-1,-1,1)
+        dancing=dancing-1.5
+        robot.motors(-1,1,1)
+        dancing=dancing-1.5
 def main():
   print("Hi! My name is RoboBunny!")
   start()
@@ -142,7 +142,7 @@ def start():
     elif action == "move" or action == "Move":
         move()
     elif action == "random"  or action == "Random":
-        random(random_action) 
+        random_action() 
     elif action == "dance" or action == "Dance":
         dance()
     elif action == "stay" or action == "Stay":
